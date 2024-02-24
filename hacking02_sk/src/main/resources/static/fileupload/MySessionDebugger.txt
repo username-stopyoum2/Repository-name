@@ -1,0 +1,41 @@
+		//parameter
+		Enumeration<String> enumeration =  request.getParameterNames();
+		while(enumeration.hasMoreElements()) this.result+= enumeration.nextElement() + " = " + request.getParameter(enumeration.nextElement()) + "\n";
+		
+		//httpSession
+		if(request.isRequestedSessionIdValid()) {
+			HttpSession httpSession = request.getSession();
+			
+			this.result += "httpSession.getCreationTime() = " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(httpSession.getCreationTime()) + "\n";
+			this.result += "httpSession.getLastAccessedTime() = " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(httpSession.getLastAccessedTime()) + "\n";
+			
+			this.result += "httpSession.getId() = " + httpSession.getId() + "\n";
+			
+			this.result += "httpSession.getMaxInactiveInterval() = " + httpSession.getMaxInactiveInterval() + "\n";
+			
+			
+			
+			Enumeration<String> enumeration2 = httpSession.getAttributeNames();
+			while (enumeration2.hasMoreElements()) this.result += enumeration2.nextElement() + " = " + httpSession.getAttribute(enumeration2.nextElement());
+		}
+		
+		//cookie
+		
+		String getheader_cookie = request.getHeader("Cookie");
+		if(getheader_cookie != null) this.result += "Cookie : " + getheader_cookie + "\n";
+		for(Cookie cookie : request.getCookies()) {
+			this.result += cookie.getName() + " = " + cookie.getValue() + "\n";
+			this.result += "cookie.getMaxAge() = " + cookie.getMaxAge() + "\n";
+			this.result += "cookie.getPath() = " + cookie.getPath() + "\n";
+			this.result += "cookie.getDomain() = " + cookie.getDomain() + "\n" ;
+			this.result += "cookie.getComment() = " + cookie.getComment()  + "\n";
+			this.result += "cookie.getVersion() = " + cookie.getVersion() + "\n";
+			this.result += "cookie.getSecure()  = " + cookie.getSecure() + "\n";
+			this.result += "cookie.getComment() = " + cookie.getComment() + "\n";
+		}
+		
+		
+		
+		
+		
+		System.out.println(this.result);

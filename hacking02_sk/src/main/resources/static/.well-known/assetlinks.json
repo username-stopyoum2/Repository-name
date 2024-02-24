@@ -1,0 +1,25 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "mypackage.mnst",
+    "sha256_cert_fingerprints":
+    ["62:AE:FE:A5:B7:26:0B:CD:29:1A:E9:75:9C:1B:32:23:6B:A4:95:DB:DE:18:08:68:22:F5:6F:20:74:5A:80:5C"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "web",
+    "site": "https://mnstbank.com:9999"
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "mypackage.mnst",
+    "sha256_cert_fingerprints":
+    ["62:AE:FE:A5:B7:26:0B:CD:29:1A:E9:75:9C:1B:32:23:6B:A4:95:DB:DE:18:08:68:22:F5:6F:20:74:5A:80:5C"]
+  }
+}]

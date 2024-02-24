@@ -1,0 +1,27 @@
+server :
+  #port : 80  # https://127.0.0.1
+  port : 8085  # https://127.0.0.1:8085
+  address: 0.0.0.0
+#  ssl:
+#    enabled: true
+#    key-store: E:/C_drive_backup/tool/my_eclipse/hacking-project/sk_sesac_pt2-master_20240131/hacking02_sk/src/main/resources/static/https/keystore.jks
+#    key-store-password: Lmh3910@
+#    key-store-type: JKS
+#    key-alias: tomcat
+
+#logging:
+#  level:
+#    javax.net.ssl: DEBUG
+
+
+spring :
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url : jdbc:mysql://localhost:3306/myhacking 
+    username: myhack
+    password: 1234
+mybatis :
+  type-aliases-package : org.example.hacking02_sk.model
+  configuration :
+    map-underscore-to-camel-case : true
+  mapper-locations: classpath:/mapper/*.xml

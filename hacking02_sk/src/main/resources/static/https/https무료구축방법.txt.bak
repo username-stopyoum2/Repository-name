@@ -1,0 +1,20 @@
+keytool -genkeypair -alias tomcat -keyalg RSA -keystore keystore.jks
+keytool -certreq -keyalg RSA -alias tomcat -file certificate.csr -keystore keystore.jks
+keytool -export -alias tomcat -file certificate.crt -keystore keystore.jks
+
+
+
+
+
+<Connector 
+	port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+	maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+	keystoreFile="/path/to/keystore.jks" keystorePass="your_keystore_password"
+	clientAuth="false" sslProtocol="TLS"
+/>
+
+
+
+
+
+

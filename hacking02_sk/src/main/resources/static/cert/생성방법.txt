@@ -1,0 +1,29 @@
+keytool -genkeypair -alias tomcat -keyalg RSA -keystore keystore.jks
+keytool -certreq -keyalg RSA -alias tomcat -file certificate.csr -keystore keystore.jks
+keytool -export -alias tomcat -file certificate.crt -keystore keystore.jks
+
+
+
+
+server.xml
+<Connector 
+	port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+           keystoreFile="/path/to/keystore.jks" keystorePass="your_keystore_password"
+           clientAuth="false" sslProtocol="TLS"
+/>
+
+
+application.yaml
+server :
+  port : 9999  # 로 설정해도 https://127.0.0.1
+  ssl:
+    enabled: true
+    key-store: E:/C_drive_backup/tool/my_eclipse/hacking-project/sk_sesac_pt2-master_20240131/hacking02_sk/src/main/resources/static/https/keystore.jks
+    key-store-password: Lmh3910@
+    key-store-type: JKS
+    key-alias: tomcat
+
+logging:
+  level:
+    javax.net.ssl: DEBUG
