@@ -1874,11 +1874,17 @@ public class MyLibrary {
 				}
 				
 				public static String getWebInfAbsolutePath(HttpServletRequest request) {
-					String webinf="",webapp="" , webinfs="";
+					String webinf="",webinfs="",webapp="";
 					if(MyLibrary.f_check_valid(request)) {
 						webapp = MyLibrary.WebWasServer.Tomcat.Servlet.getWebAppAbsolutePath(request);
 						
-						webinfs=MyLibrary.FileSystem.find_egrep(webapp, "WEB-INF$", "g");
+						
+						if(os_name.startsWith("window")) {
+							webinf=webapp.replace("resources\\", "webapp\\WEB-INF");
+						}else if(os_name.startsWith("linux")) {
+							//webinfs=webapp.replace("resources\\", "ROOT/WEB-INF"); 
+						}
+						/*
 	        			for(String webinf_1: webinfs.split("\n")) {
 		        			if(os_name.startsWith("window")) {
 		        				if(webinf_1.contains("webapp/WEB-INF")) {
@@ -1890,6 +1896,7 @@ public class MyLibrary {
 		        				}
 		        			}	        				
 	        			}
+	        			*/
 					}else {
 	        			System.out.println("파일을 찾는중.. 윈도우 일 시 기본 C:/ 에서부터 찾음.");
 	        			webinfs=MyLibrary.FileSystem.find_egrep("/", "WEB-INF$", "g");
@@ -2102,14 +2109,15 @@ public class MyLibrary {
 				return request.getParameter("E2E_input_name_1");
 			}
 
-			public static String decript(HttpServletRequest request,HttpSession session,String input_name , String plain_text , boolean debug_mod) {
+			public static String decript(HttpServletRequest request,String input_name , boolean debug_mod) {
 				E2ECrypto.setDebugMode(debug_mod);
-				String key_der_path="";
+				String key_der_path=MyLibrary.WebWasServer.Tomcat.Servlet.getWebInfAbsolutePath(request)+"/raon_config/Private2048.key.der";
 				
 				E2ECrypto e2eCrypto = new E2ECrypto(
 					request ,     
-					session ,   
+					request.getSession() ,   
 					key_der_path
+					
 					//new File(application.getRealPath("./WEB-INF/raon_config/Private2048.key.der")).getAbsolutePath()    
 				);
 				

@@ -21,15 +21,6 @@ public class MyDBConnection {
     private static ResultSet resultSet;
     private static DataSource dataSource;
 
-//    public static void setConnection(DataSource dataSource) {
-//        try {
-//            connection = dataSource.getConnection();
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     @Autowired
     public MyDBConnection(DataSource dataSource) {
         try {
@@ -52,12 +43,6 @@ public class MyDBConnection {
                 connection = null;
             }
             connection = dataSource.getConnection();
-//            Class.forName("com.mysql.jdbc.Driver");
-//            connection =  DriverManager.getConnection(
-//                    "jdbc:mysql://localhost:3306/myhacking?verifyServerCertificate=false&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&autoReconnect=true",
-//                    "myhack",
-//                    "1234"
-//            );
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

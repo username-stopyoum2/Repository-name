@@ -140,7 +140,7 @@ public class BankingController {
         Banking banking = bankingMapper.myacc(sendBanking.getMyacc());
         int submoney = banking.getMymoney() - sendBanking.getMyaccbalance();
         String memo = sendBanking.getMyaccmemo();
-
+        /* 복호화처리? */
         if (submoney < 0) {
             msg = "잔고가 부족합니다.";
             mav.addObject("msg", msg);

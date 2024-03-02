@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.example.hacking02_sk.MyLibrary;
 import org.example.hacking02_sk.model.Location;
 import org.example.hacking02_sk.model.User;
 import org.example.hacking02_sk.model.UserDAO;
@@ -57,7 +58,7 @@ public class UserController {
 	}
 	
 	@PostMapping("join")
-    public ModelAndView join(User user, HttpServletResponse response) throws IOException {
+    public ModelAndView join(User user, HttpServletResponse response , HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		if (user.getMyname().equals("") || user.getMyid().equals("") || user.getMypw().equals("") || 
 				user.getMyemail().equals("") || user.getMylocation().equals("") || user.getMyphone().equals("") ||
@@ -72,7 +73,16 @@ public class UserController {
 			System.out.print("핸드폰 중복 검사 flag : " + flag);
 
 			if (flag == 1) { // 중복되는 핸드폰 번호 없을 때
-				int result = userDAO.signup(user);
+				/* nxkey 복호화 */
+				
+				user.setMypw(MyLibrary.RaonSecure.Nxkey.decript(request, "mypw", true));
+				//user.setMypw("복호화값");
+				
+				user.setMyaccpw(MyLibrary.RaonSecure.Nxkey.decript(request, "myaccpw", true));
+				//user.setMyaccpw("복호화값");
+				
+				
+				int result = userDAO.signup(user);  // insert into 로 값 넣음.
 
 				if (result > 0) { // 회원가입 성공
 					mav.setViewName("redirect:/");

@@ -57,7 +57,7 @@ public class UserDAO {
 	}
 	
 	//회원가입
-	public int signup(User user) {
+	public int signup(User user) { // 를 호출하는 쪽에서 user.setMypw("복호화값"); 
         String query1 = "INSERT INTO myuser (myname, myid, mypw, myemail, mylocation, myphone, mysid) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?);";
         String query2 = "INSERT INTO myacc (myacc, myid, mymoney, mybank, myaccpw) " +

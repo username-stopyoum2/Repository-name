@@ -79,6 +79,35 @@ create table if not exists myboard(
     mytext text
 );
 
+select * from myhacking.myboard;
+update myhacking.myboard
+set mysubject = 'test'
+where mypriority = 94
+;
+
+
+insert into jsp_database_user.user_NoticeBoard_Write(__date , _priority , _readcount , _content ,_ip ,  _id , _subject , _filepath , _text) 
+values(now() , 0 , 0 , '게시판내용' , '192.168.0.1' , '아이디','게시판제목','/절대경로/파일1;/절대경로/파일2;','text값') ;
+
+select * from jsp_database_user.user_NoticeBoard_Write order by _priority desc; # 게시글 작성순으로 정렬
+
+set sql_safe_updates=0; 
+# 게시판 수정
+update  jsp_database_user.user_NoticeBoard_Write
+set 
+	__date = now(), _priority = (select _priority from jsp_database_user.user_NoticeBoard_Write) + 1, 
+	_readcount = (select _readcount from jsp_database_user.user_NoticeBoard_Write) , 
+    _content = '변경된 게시판내용' ,_ip = '업데이트때.작성된.ip.주소' ,  _id = (select _id from jsp_database_user.user_NoticeBoard_Write) ,
+    _subject = (select _subject from jsp_database_user.user_NoticeBoard_Write) , 
+    _filepath = '변경된 파일경로;' , 
+    _text = '변경된 텍스트'
+where _id = '요청온id' && _priority = 1; 
+
+delete from jsp_database_user.user_noticeboard_write; # 컬럼의값 삭제
+
+drop table if exists jsp_database_user.user_NoticeBoard_Write; # 테이블 삭제
+
+
 # myuser 테이블에 데이터 추가
 INSERT INTO myuser (myname, myid, mypw, myemail, mylocation, myphone, mysid)
 VALUES 

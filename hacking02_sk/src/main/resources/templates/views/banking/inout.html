@@ -8,6 +8,7 @@
     
     <!-- 돈많은 -->
     <script src="/js/MyHtmlCss.js" ></script>
+    
 	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
     <script type="application/javascript" th:src="@{/js/banking.js}"></script>
     
@@ -69,7 +70,7 @@
 						<tr>
 							<td style="background-color:#fafafa">계좌비밀번호</td>
 							<td colspan="3">
-								<input id="mypw" name="myaccpw" data-enc="on" data-dataType="Aan@" type="password" class="form-control" style="width:66%;"   placeholder="숫자 4자리" />
+								<input id="mypw" name="myaccpw" maxlength="4" type="password" class="form-control" style="width:66%;"   placeholder="숫자 4자리" />
 							</td>
 						</tr>
 					</tbody>
@@ -146,7 +147,7 @@
 						</tr>
 						<tr>
 							<td colspan="10" style="text-align:right;">
-								<input type="submit" onclick="TK_makeEncData(sendform);" class="btn btn-secondary form-label" style="width:100px; margin: 0 auto;" value="다음">
+								<input type="submit" class="btn btn-secondary form-label" style="width:100px; margin: 0 auto;" value="다음">
 							</td>
 						</tr>
 					</tbody>

@@ -71,14 +71,14 @@
 					<tr>
 						<td style="background-color:#ffffff">비밀번호 *</td>
 						<td colspan="2">
-							<input class="form-control" type="password"  id="input_mypw" name="mypw" data-enc="on" data-dataType="Aan@" placeholder="8~20자리" maxlength="16" oninput="checkPassword()">
+							<input class="form-control" type="password"  id="input_mypw" name="mypw" data-enc="on" data-dataType="Aan@" placeholder="8~20자리" maxlength="16" >
 							<span id="label_mypw" style="color: red;"></span>
 						</td>
 					</tr>
 					<tr>
 						<td style="background-color:#ffffff">비밀번호 확인 *</td> 
 						<td colspan="2">
-							<input class="form-control" type="password" id="input_mycheckpw" name="mypwcheck" data-enc="on" data-dataType="Aan@" maxlength="16" oninput="checkConfirmPassword()">
+							<input class="form-control" type="password" id="input_mycheckpw" name="mypwcheck" data-enc="on" data-dataType="Aan@" maxlength="16" >
 							<span id="label_mycheckpw" style="color: red;"></span>
 						</td>
 					</tr>
@@ -105,7 +105,7 @@
 					<tr>
 						<td style="background-color:#ffffff">계좌 비밀번호 *</td>
 						<td colspan="2">
-							<input  type="password" data-enc="on" data-dataType="Aan@"  class="form-control" id="input_myaccpw" name="myaccpw" placeholder="4자리 숫자만 입력 가능" maxlength="4"  oninput="numMaxLength(this)">
+							<input  type="password" data-enc="on" data-dataType="Aan@"  class="form-control" id="input_myaccpw" name="myaccpw" placeholder="4자리 숫자만 입력 가능" maxlength="4" >
 						</td>
 					</tr>
 					<tr>
@@ -251,6 +251,20 @@
         function setLocation(name){
             document.getElementById('input_mylocation').value = name;
         }
+        
+        
+        
+        /* nxkey 정상동작시키기위해 적용 */
+		input_mypw.addEventListener('input',(e)=>{
+			checkPassword()
+		})
+		input_mycheckpw.addEventListener('input',(e)=>{
+			checkConfirmPassword()
+		})	
+		input_mycheckpw.addEventListener('input',(e)=>{
+			numMaxLength(e.currentTarget)
+		})	        
+		
 	    window.onload = function(){
     		document.getElementById("find_location").onclick = function(){
         		window.open("/member/join/popup","주소 찾기","width=700,height=500,top=200,left=200;");
@@ -262,6 +276,7 @@
     		form_id = document.querySelector('#form_id')
     		input_submit.addEventListener('click',(e)=>{
     			TK_makeEncData(form_id);
+    			passwordCheck = true; // nxkey 적용때문에 무조건 true 로 설정.
     		})
 		};
 		
